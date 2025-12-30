@@ -22,7 +22,7 @@ See [Chapter 19. Building container images with Buildah][redhat-documentation].
 
 1. Initialize empty working container
     ```
-    buildah from --isolation=chroot --name "sample-redhat" scratch
+    buildah from --name "sample-redhat" scratch
     ```
 2. Confirm container is running
     ```
