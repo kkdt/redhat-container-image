@@ -2,7 +2,7 @@
 
 ## 1 Overview
 
-See [Chapter 19. Building container images with Buildah][redhat-documentation]. 
+See [Chapter 19. Building container images with Buildah][redhat-documentation].
 
 ## 2 Development Tasks
 > The steps below performed on Red Hat 8.10 
@@ -44,7 +44,8 @@ See [Chapter 19. Building container images with Buildah][redhat-documentation].
     ```
 6. Initialize an RPM database within the scratch image and add the `redhat-release` package
     ```
-    mkdir -p /tmp/cache/dnf /tmp/log && dnf install -y --releasever=9 \
+    rm -rf /tmp/cache/dnf /tmp/log && mkdir -p /tmp/cache/dnf /tmp/log \
+      && dnf install -y --releasever=9 \
       --config $(pwd)/dnf.conf \
       --disableplugin=subscription-manager \
       --setopt=reposdir=$(pwd)/yum.repos.d/9.5 \
@@ -52,14 +53,10 @@ See [Chapter 19. Building container images with Buildah][redhat-documentation].
       --setopt=cachedir=/tmp/cache/dnf \
       redhat-release
     ```
-
-
-dnf -c "${yumconf}" \
-  --installroot="${target}" \
-  --setopt=tsflags=nodocs \
-  --setopt=group_package_types=mandatory \
-  --setopt=install_weak_deps=false \
-  -y install <packages>
+7. Commit container image
+    ```
+    buildah commit sample-redhat sample-redhat:dev
+    ```
 
 [//]: Links
 
