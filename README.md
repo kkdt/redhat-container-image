@@ -16,6 +16,7 @@ See [Chapter 19. Building container images with Buildah][redhat-documentation].
 - coreutils
 - dnf
 - ncurses
+- redhat-release
 - shadow-utils
 - vi
 - yum
