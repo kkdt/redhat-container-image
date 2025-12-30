@@ -39,6 +39,11 @@ See [Chapter 19. Building container images with Buildah][redhat-documentation].
     ```
     podman run -it --rm localhost/sample-redhat:dev /bin/bash
     ```
+6. Image size
+    ```
+    REPOSITORY                               TAG         IMAGE ID      CREATED         SIZE
+    localhost/sample-redhat                  dev         243c7d29fa0c  17 minutes ago  278 MB
+    ```
 
 ## 4 Using the Base Image
 
@@ -47,11 +52,16 @@ another container image.
 
 1. Perform a Podman build
     ```
-    podman build --no-cache --squash --tag sample:dev .
+    podman build --no-cache --squash-all --tag sample:dev .
     ```
 2. Run the container
     ```
     podman run -it --rm localhost/sample:dev
+    ```
+3. Image size
+    ```
+    REPOSITORY                               TAG         IMAGE ID      CREATED         SIZE
+    localhost/sample                         dev         5e639419df32  7 seconds ago   278 MB
     ```
 
 
