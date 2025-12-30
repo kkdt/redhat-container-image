@@ -32,7 +32,7 @@ rm -rf ${__buildir}/cache/dnf ${__buildir}/log && mkdir -p ${__buildir}/cache/dn
   --setopt=tsflags=nodocs \
   --setopt=group_package_types=mandatory \
   --setopt=install_weak_deps=false \
-  redhat-release ansible-core bash coreutils ncurses shadow-utils vi
+  redhat-release ansible-core bash coreutils dnf ncurses shadow-utils vi yum yum-utils
 
 # Step 6: Commit the container image
 echo "Committing container image: ${__name}"
