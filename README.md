@@ -25,7 +25,6 @@ See [Chapter 19. Building container images with Buildah][redhat-documentation].
 
 1. Download the Red Hat full installation image (examples below)
     - [Red Hat 9.5][rhel9.5]
-    - [Red Hat 10.1][rhel10.1]
 2. Mount DVD 
     ```
     sudo mount ~/Data/iso/rhel-9.5-x86_64-dvd.iso /mnt/
