@@ -1,13 +1,21 @@
 # redhat-container-image
 
+> The steps below performed on Red Hat 8.10 Enterprise Linux
+
 ## 1 Overview
 
 See [Chapter 19. Building container images with Buildah][redhat-documentation].
 
-## 2 Development Tasks
-> The steps below performed on Red Hat 8.10 
+## 2 Base Packages
 
-### 2.1 Download Red Hat DVD
+- ansible-core
+- bash
+- coreutils
+- ncurses
+- shadow-utils
+- vi
+
+## 3 Quickstart
 
 1. Download the Red Hat full installation image (examples below)
     - [Red Hat 9.5][rhel9.5]
@@ -17,45 +25,13 @@ See [Chapter 19. Building container images with Buildah][redhat-documentation].
     sudo mount ~/Data/iso/rhel-9.5-x86_64-dvd.iso /mnt/
     ```
 3. A [yum.repo](yum.repos.d/9.5/yum.repo) is provided as an example for Red Hat 9.5
-
-### 2.2 Buildah from Scratch
-
-1. Initialize empty working container
+4. Execute the build
     ```
-    buildah from --name "sample-redhat" scratch
+    buildah unshare ./build.sh
     ```
-2. Confirm container is running
+5. Run the container
     ```
-    # buildah ps
-    CONTAINER ID  BUILDER  IMAGE ID     IMAGE NAME                       CONTAINER NAME
-    01ed31ea5331     *                  scratch                          sample-redhat
-    ```
-3. Unshare to run shell commands in the namespaces running as **root** in the user namespace
-    ```
-    buildah unshare
-    ```
-4. Mount and save container path to a variable
-    ```
-    scratchmnt=$(buildah mount sample-redhat)
-    ```
-5. Confirm container mount path
-    ```
-    echo $scratchmnt
-    ```
-6. Initialize an RPM database within the scratch image and add the `redhat-release` package
-    ```
-    rm -rf /tmp/cache/dnf /tmp/log && mkdir -p /tmp/cache/dnf /tmp/log \
-      && dnf install -y --releasever=9 \
-      --config $(pwd)/dnf.conf \
-      --disableplugin=subscription-manager \
-      --setopt=reposdir=$(pwd)/yum.repos.d/9.5 \
-      --installroot=$scratchmnt \
-      --setopt=cachedir=/tmp/cache/dnf \
-      redhat-release
-    ```
-7. Commit container image
-    ```
-    buildah commit sample-redhat sample-redhat:dev
+    podman run -it --rm localhost/sample-redhat:dev /bin/bash
     ```
 
 [//]: Links
