@@ -5,7 +5,14 @@
 ## 1 Overview
 
 This project is a walkthrough of Red Hat documentation in using `buildah` to build a base Red Hat 9.5 image from scratch, 
-and then we will use that base image to do further provisioning. 
+and then we will use that base image to do further provisioning.
+
+Container image sizes for UBI
+```
+REPOSITORY                               TAG         IMAGE ID      CREATED         SIZE
+registry.access.redhat.com/ubi9          latest      d1a270d60e90  8 days ago      218 MB
+registry.access.redhat.com/ubi9-minimal  latest      ef50c436020b  3 weeks ago     107 MB
+```
 
 See [Chapter 19. Building container images with Buildah][redhat-documentation].
 
